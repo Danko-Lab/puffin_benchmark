@@ -16,7 +16,7 @@ pred_profs_puffin = puffin.puffin_predict(
 
 # save the predictions
 np.savez_compressed(
-    "clipnet_test_predictions/puffin_clipnet_test_predictions.npz", pred_profs_puffin
+    "predictions/puffin_clipnet_test_predictions.npz", pred_profs_puffin
 )
 
 expt = pd.read_csv(
