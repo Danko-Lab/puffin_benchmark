@@ -5,7 +5,7 @@ import pandas as pd
 from scipy.spatial.distance import jensenshannon as jsd
 from scipy.stats import pearsonr, spearmanr
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+os.environ["CUDA_VISIBLE_DEVICES"] = "0"
 import puffin
 
 # create a puffin model
