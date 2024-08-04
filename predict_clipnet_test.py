@@ -8,8 +8,10 @@ from scipy.stats import pearsonr
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import puffin
 
+# create a puffin model
 puffin_model = puffin.Puffin(use_cuda=True)
 
+# predict -> numpy array of size (num_peaks, 2 strands, 500bp)
 pred_profs_puffin = puffin.puffin_predict(
     "data/clipnet_test/fixed_uniq_windows_puffin_clipnet_test.fa.gz", puffin_model
 )
