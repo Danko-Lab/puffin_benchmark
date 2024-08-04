@@ -1,12 +1,21 @@
-import pandas as pd
-import numpy as np
-import torch
-from torch import nn
-from torch_fftconv import fft_conv1d, FFTConv1d
-from torch.autograd import grad
-import selene_sdk
-from selene_sdk import sequences
+"""
+Identical to the original puffin.py script, but with an additional puffin_predict function.
+"""
+
 import re
+
+import numpy as np
+import pandas as pd
+import pyfastx
+import selene_sdk
+import torch
+import tqdm
+from selene_sdk import sequences
+from torch import nn
+from torch.autograd import grad
+from torch_fftconv import fft_conv1d, FFTConv1d
+
+
 
 class Puffin(nn.Module):
     def __init__(self, use_cuda=False):
@@ -514,9 +523,9 @@ class Puffin(nn.Module):
         lines["Basepair contribution score to transcription initiation"] = bp_score
 
         for motif in motif_contr[targeti]:
-            lines[
-                motif + " Basepair contribution score to motif activation"
-            ] = motif_contr[targeti][motif]
+            lines[motif + " Basepair contribution score to motif activation"] = (
+                motif_contr[targeti][motif]
+            )
 
         df = pd.DataFrame.from_dict(lines, orient="index")
 
@@ -608,8 +617,9 @@ class Puffin(nn.Module):
 
 
 if __name__ == "__main__":
-    from docopt import docopt
     import sys
+
+    from docopt import docopt
 
     doc = """
     Puffin outputs transcription inititation signal prediciton for the input genome sequence.
@@ -752,3 +762,16 @@ if __name__ == "__main__":
             df = net.interpret(seq_bp, targeti=targeti, reverse_strand=True)
             df.to_csv(name + "_rev_strand.csv")
             print("Reverse strand done!")
+
+
+def puffin_predict(fa_path, puffin_model, silence=False):
+    seqs = pyfastx.Fasta(fa_path)
+    preds = []
+    for rec in tqdm.tqdm(seqs, desc=f"Predicting on {fa_path}", disable=silence):
+        raw_pred_df = puffin_model.predict(rec.seq)
+        # select for the PRO-cap + and - strands from all outputs
+        pred = np.array(
+            [np.array(raw_pred_df)[6], np.array(raw_pred_df)[-1]]  # fwd strand
+        )  # rev strand
+        preds.append(pred)
+    return np.array(preds).astype(float)
