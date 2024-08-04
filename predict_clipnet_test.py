@@ -3,7 +3,7 @@ import os
 import numpy as np
 import pandas as pd
 from scipy.spatial.distance import jensenshannon as jsd
-from scipy.stats import pearsonr
+from scipy.stats import pearsonr, spearmanr
 
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 import puffin
@@ -27,8 +27,12 @@ expt = pd.read_csv(
 pred_profs = pd.DataFrame(
     np.concatenate([pred_profs_puffin[:, 0, :], pred_profs_puffin[:, 1, :]], axis=1)
 )
-print("JSD: ", jsd(pred_profs, expt, axis=1).mean())
+print("Mean Profile JSD: ", np.mean(jsd(pred_profs, expt, axis=1)))
 print(
     "Pearson Quantity: ",
     pearsonr(np.log(expt.sum(axis=1)), np.log(pred_profs.sum(axis=1))),
+)
+print(
+    "Spearman Quantity: ",
+    spearmanr(np.log(expt.sum(axis=1)), np.log(pred_profs.sum(axis=1))),
 )
