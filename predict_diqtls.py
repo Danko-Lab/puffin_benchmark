@@ -23,4 +23,4 @@ pred_profs_puffin = {
 }
 
 # save the predictions
-np.savez_compressed("predictions/puffin_diqtl_predictions.npz", pred_profs_puffin)
+np.savez_compressed("predictions/puffin_diqtl_predictions.npz", **pred_profs_puffin)
