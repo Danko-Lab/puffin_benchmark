@@ -2,5 +2,7 @@ numpy
 pandas
 torch
 docopt
+pyfastx
 selene_sdk
 torch_fftconv
+tqdm
