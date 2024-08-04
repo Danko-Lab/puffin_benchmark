@@ -4,6 +4,7 @@ benchmark CLIPNET (He et al., 2024).
 """
 
 import glob
+import os
 
 import numpy as np
 
@@ -17,7 +18,8 @@ files = glob.glob("data/diqtls/*.hs37d5.bwa.uniqueUMI.fna.gz")
 
 # numpy arrays of size (num_peaks, 2 strands, 500bp)
 pred_profs_puffin = {
-    fname: puffin.puffin_predict(fname, puffin_model) for fname in files
+    os.path.split(fname)[-1]: puffin.puffin_predict(fname, puffin_model)
+    for fname in files
 }
 
 # save the predictions
