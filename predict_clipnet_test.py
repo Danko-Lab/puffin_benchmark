@@ -27,7 +27,7 @@ expt = pd.read_csv(
 pred_profs = pd.DataFrame(
     np.concatenate([pred_profs_puffin[:, 0, :], pred_profs_puffin[:, 1, :]], axis=1)
 )
-print("JSD: ", jsd(pred_profs, expt, axis=1))
+print("JSD: ", jsd(pred_profs, expt, axis=1).mean())
 print(
     "Pearson Quantity: ",
     pearsonr(np.log(expt.sum(axis=1)), np.log(pred_profs.sum(axis=1))),
