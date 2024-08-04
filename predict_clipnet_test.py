@@ -1,16 +1,14 @@
-import os
-
 import numpy as np
 import pandas as pd
 from scipy.spatial.distance import jensenshannon as jsd
 from scipy.stats import pearsonr
 
-os.environ["CUDA_VISIBLE_DEVICES"] = "1"
-from puffin import Puffin, puffin_predict
+# os.environ["CUDA_VISIBLE_DEVICES"] = "1"
+import puffin
 
-puffin_model = Puffin(use_cuda=True)
+puffin_model = puffin.Puffin(use_cuda=True)
 
-pred_profs_puffin = puffin_predict(
+pred_profs_puffin = puffin.puffin_predict(
     "data/clipnet_test/fixed_uniq_windows_puffin_clipnet_test.fa.gz", puffin_model
 )
 
