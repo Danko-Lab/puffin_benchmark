@@ -765,6 +765,12 @@ if __name__ == "__main__":
 
 
 def puffin_predict(fa_path, puffin_model, silence=False):
+    """
+    Not in the original puffin package. Wrapper to extract both strands of the PRO-cap
+    predictions.
+    
+    Shamelessly _borrowed_ from Kelly Cochran.
+    """
     seqs = pyfastx.Fasta(fa_path)
     preds = []
     for rec in tqdm.tqdm(seqs, desc=f"Predicting on {fa_path}", disable=silence):
