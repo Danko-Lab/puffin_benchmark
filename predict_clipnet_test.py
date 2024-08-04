@@ -27,6 +27,7 @@ expt = pd.read_csv(
 pred_profs = pd.DataFrame(
     np.concatenate([pred_profs_puffin[:, 0, :], pred_profs_puffin[:, 1, :]], axis=1)
 )
+print("Mean Profile Pearson: ", np.mean(pred_profs.corrwith(expt, axis=1)))
 print("Mean Profile JSD: ", np.mean(jsd(pred_profs, expt, axis=1)))
 print(
     "Pearson Quantity: ",
