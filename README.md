@@ -20,6 +20,10 @@ pip install -r requirements.txt
 
 For GPU support, make sure to install the version of Pytorch compiled to work on your CUDA version (https://pytorch.org/get-started/locally/). 
 
-## Overall model performance
+## CLIPNET test set prediction
+
+TODO
+
+## LCL initiation QTL prediction
 
 TODO
