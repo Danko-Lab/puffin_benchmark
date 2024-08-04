@@ -5,7 +5,7 @@ import pandas as pd
 from scipy.spatial.distance import jensenshannon as jsd
 from scipy.stats import pearsonr
 
-os.environ["CUDA_VISIBLE_DEVICES"] = str(1)
+os.environ["CUDA_VISIBLE_DEVICES"] = 1
 from puffin import Puffin, puffin_predict
 
 puffin_model = Puffin(use_cuda=True)
