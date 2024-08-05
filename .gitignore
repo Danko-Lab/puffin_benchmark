@@ -1,7 +1,7 @@
 test.py
 **/.DS_Store
-data/*.fai
-data/*.fxi
+data/*/*.fai
+data/*/*.fxi
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # Python gitignore
